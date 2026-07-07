@@ -1,0 +1,233 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:encounter-001",
+      "resource": {
+        "resourceType": "Encounter",
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "Ambulatory"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "225358003",
+                "display": "Wound care management"
+              }
+            ]
+          }
+        ],
+        "subject": { "reference": "Patient/12345" },
+        "participant": [
+          {
+            "individual": { "reference": "Practitioner/provider-001" }
+          }
+        ],
+        "period": {
+          "start": "2026-06-03T09:00:00Z",
+          "end": "2026-06-03T09:30:00Z"
+        }
+      },
+      "request": { "method": "POST", "url": "Encounter" }
+    },
+    {
+      "fullUrl": "urn:uuid:condition-wound-001",
+      "resource": {
+        "resourceType": "Condition",
+        "clinicalStatus": {
+          "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/condition-clinical", "code": "active" }]
+        },
+        "verificationStatus": {
+          "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status", "code": "confirmed" }]
+        },
+        "category": [
+          {
+            "coding": [{ "system": "http://snomed.info/sct", "code": "416940007", "display": "Wound" }]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "399912005",
+              "display": "Pressure ulcer"
+            }
+          ],
+          "text": "Pressure injury"
+        },
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "46862004",
+                "display": "Heel region"
+              }
+            ],
+            "text": "Right heel"
+          }
+        ],
+        "subject": { "reference": "Patient/12345" },
+        "encounter": { "reference": "urn:uuid:encounter-001" },
+        "onsetDateTime": "2026-05-01"
+      },
+      "request": { "method": "POST", "url": "Condition" }
+    },
+    {
+      "fullUrl": "urn:uuid:obs-wound-size",
+      "resource": {
+        "resourceType": "Observation",
+        "status": "final",
+        "category": [
+          {
+            "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/observation-category", "code": "exam" }]
+          }
+        ],
+        "code": {
+          "coding": [
+            { "system": "http://loinc.org", "code": "39125-0", "display": "Wound size" }
+          ]
+        },
+        "subject": { "reference": "Patient/12345" },
+        "encounter": { "reference": "urn:uuid:encounter-001" },
+        "effectiveDateTime": "2026-06-03T09:00:00Z",
+        "component": [
+          {
+            "code": { "coding": [{ "system": "http://loinc.org", "code": "39126-8", "display": "Wound length" }] },
+            "valueQuantity": { "value": 4.2, "unit": "cm", "system": "http://unitsofmeasure.org", "code": "cm" }
+          },
+          {
+            "code": { "coding": [{ "system": "http://loinc.org", "code": "39127-6", "display": "Wound width" }] },
+            "valueQuantity": { "value": 2.8, "unit": "cm", "system": "http://unitsofmeasure.org", "code": "cm" }
+          },
+          {
+            "code": { "coding": [{ "system": "http://loinc.org", "code": "39128-4", "display": "Wound depth" }] },
+            "valueQuantity": { "value": 0.5, "unit": "cm", "system": "http://unitsofmeasure.org", "code": "cm" }
+          }
+        ]
+      },
+      "request": { "method": "POST", "url": "Observation" }
+    },
+    {
+      "fullUrl": "urn:uuid:obs-wound-bed",
+      "resource": {
+        "resourceType": "Observation",
+        "status": "final",
+        "category": [
+          {
+            "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/observation-category", "code": "exam" }]
+          }
+        ],
+        "code": {
+          "coding": [
+            { "system": "http://loinc.org", "code": "39132-6", "display": "Wound bed appearance" }
+          ]
+        },
+        "subject": { "reference": "Patient/12345" },
+        "encounter": { "reference": "urn:uuid:encounter-001" },
+        "effectiveDateTime": "2026-06-03T09:00:00Z",
+        "component": [
+          {
+            "code": { "coding": [{ "system": "http://loinc.org", "code": "39132-6", "display": "Tissue type" }] },
+            "valueCodeableConcept": {
+              "coding": [{ "system": "http://snomed.info/sct", "code": "385204003", "display": "Granulation tissue" }],
+              "text": "Granulation, Slough"
+            }
+          },
+          {
+            "code": { "coding": [{ "system": "http://loinc.org", "code": "39130-0", "display": "Wound exudate type" }] },
+            "valueCodeableConcept": {
+              "coding": [{ "system": "http://snomed.info/sct", "code": "33638009", "display": "Serosanguineous discharge" }]
+            }
+          },
+          {
+            "code": { "coding": [{ "system": "http://loinc.org", "code": "39131-8", "display": "Wound exudate amount" }] },
+            "valueCodeableConcept": { "text": "Moderate" }
+          }
+        ]
+      },
+      "request": { "method": "POST", "url": "Observation" }
+    },
+    {
+      "fullUrl": "urn:uuid:obs-pain",
+      "resource": {
+        "resourceType": "Observation",
+        "status": "final",
+        "category": [
+          {
+            "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/observation-category", "code": "survey" }]
+          }
+        ],
+        "code": {
+          "coding": [{ "system": "http://loinc.org", "code": "72514-3", "display": "Pain severity — numeric rating scale" }]
+        },
+        "subject": { "reference": "Patient/12345" },
+        "encounter": { "reference": "urn:uuid:encounter-001" },
+        "effectiveDateTime": "2026-06-03T09:00:00Z",
+        "valueInteger": 4
+      },
+      "request": { "method": "POST", "url": "Observation" }
+    },
+    {
+      "fullUrl": "urn:uuid:media-photo-001",
+      "resource": {
+        "resourceType": "Media",
+        "status": "completed",
+        "type": {
+          "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/media-type", "code": "image" }]
+        },
+        "subject": { "reference": "Patient/12345" },
+        "encounter": { "reference": "urn:uuid:encounter-001" },
+        "createdDateTime": "2026-06-03T09:05:00Z",
+        "operator": { "reference": "Practitioner/provider-001" },
+        "reasonCode": [
+          {
+            "coding": [{ "system": "http://snomed.info/sct", "code": "225358003", "display": "Wound care management" }]
+          }
+        ],
+        "bodySite": {
+          "coding": [{ "system": "http://snomed.info/sct", "code": "46862004", "display": "Heel region" }]
+        },
+        "content": {
+          "contentType": "image/jpeg",
+          "url": "https://your-hipaa-storage.example.com/photos/wound-001.jpg",
+          "title": "Wound photo — right heel — 2026-06-03"
+        },
+        "note": [{ "text": "Measured: 4.2 cm × 2.8 cm via photo measurement tool" }]
+      },
+      "request": { "method": "POST", "url": "Media" }
+    },
+    {
+      "fullUrl": "urn:uuid:careplan-001",
+      "resource": {
+        "resourceType": "CarePlan",
+        "status": "active",
+        "intent": "plan",
+        "title": "Wound care plan — right heel",
+        "subject": { "reference": "Patient/12345" },
+        "encounter": { "reference": "urn:uuid:encounter-001" },
+        "period": { "start": "2026-06-03" },
+        "activity": [
+          {
+            "detail": {
+              "kind": "ServiceRequest",
+              "code": {
+                "coding": [{ "system": "http://snomed.info/sct", "code": "225358003", "display": "Wound care management" }]
+              },
+              "status": "in-progress",
+              "description": "Irrigate with NS, apply Mepilex Border dressing. Change every 3 days."
+            }
+          }
+        ],
+        "note": [{ "text": "Follow-up in 1 week. Monitor for signs of infection." }]
+      },
+      "request": { "method": "POST", "url": "CarePlan" }
+    }
+  ]
+}
